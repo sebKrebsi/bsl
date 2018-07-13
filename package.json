@@ -1,0 +1,36 @@
+{
+  "name": "bsl",
+  "version": "1.0.0",
+  "description": "Frontend Dependencies and Tools for bsl",
+  "private": true,
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-confirmation2": "^2.2.0",
+    "datatables.net-bs": "^1.10.12",
+    "datatables.net-buttons": "^1.2.1",
+    "datatables.net-buttons-bs": "^1.2.1",
+    "font-awesome": "^4.6.3",
+    "jquery": "^1.12.4",
+    "moment": "^2.14.1",
+    "selectize": "^0.12.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.0",
+    "grunt-assets-versioning": "^1.0.6",
+    "grunt-chokidar": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "proprietary"
+}

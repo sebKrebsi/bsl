@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ post.headline }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <p><csmall>Posted: {{ post.createDate.format('d.m.Y') }}</csmall></p>
+            {{ post.msg|raw }}
+        </div>
+        <div class="col-lg-4">
+            <h2>{{ 'userPages.news.facebook'|trans }}</h2>
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FBasketballLeipzig&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+                    id="facebook-news-iframe"
+                    class="facebook-iframe"
+                    scrolling="no" frameborder="0"
+                    allowTransparency="true"></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+{% endblock %}

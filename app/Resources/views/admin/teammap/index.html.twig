@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'teamMap.title.index'|trans }}{% endblock %}
+{% block content %}
+
+    <table class="table table-responsive table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>{{ 'teamMap.fields.link'|trans }}</th>
+            <th>{{ 'action.headline'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teamMap in teamMaps %}
+            <tr>
+                <td>{{ teamMap.mapLink }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('teammap_edit', { 'id': teamMap.id }) }}">{{ 'datatables.actions.edit'|trans }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if showCreate %}
+    <a class="btn btn-default" href="{{ path('teammap_new') }}">{{ 'action.create'|trans }}</a>
+    {% endif %}
+{% endblock %}

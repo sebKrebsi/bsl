@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'teamMap.title.new'|trans }}{% endblock %}
+{% block content %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input class="btn btn-primary" type="submit" value="{{ 'action.create'|trans }}"/>
+    {{ form_end(form) }}
+
+    <a class="btn btn-default" href="{{ path('teammap_index') }}">{{ 'action.backToList'|trans }}</a>
+{% endblock %}

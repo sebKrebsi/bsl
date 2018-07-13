@@ -1,0 +1,58 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+# assets
+    app.assets.grunt_assets_version_strategy:
+        class: AppBundle\Util\GruntAssetsVersionStrategy
+        arguments: ['%assets.mapping_file_path%']
+        public: false
+
+# twig extension
+    twig_extensions.intl:
+        class: Twig_Extensions_Extension_Intl
+        public: false
+        tags:
+            - { name: twig.extension }
+    app.twig_extensions.menu_manipulator:
+        class: AppBundle\Twig\MenuManipulatorExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+# menu
+    app.menu_builder:
+        class: AppBundle\Menu\Builder
+        arguments: ["@knp_menu.factory", "@request_stack"]
+        tags:
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: mainMenu }
+            - { name: knp_menu.menu_builder, method: breadcrumbMenu, alias: breadcrumbMenu }
+
+    app.admin.handler.access_denied:
+        class: AppBundle\Util\AdminAccessDeniedHandler
+
+
+    app.datatable.news:
+        class: AppBundle\Datatables\NewsDatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.files:
+        class: AppBundle\Datatables\FileDatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.teams:
+        class: AppBundle\Datatables\TeamDatatable
+        parent: sg_datatables.datatable.abstract
+
+    gedmo.listener.sortable:
+            class: Gedmo\Sortable\SortableListener
+            tags:
+                - { name: doctrine.event_subscriber, connection: default }
+            calls:
+                - [ setAnnotationReader, [ "@annotation_reader" ] ]

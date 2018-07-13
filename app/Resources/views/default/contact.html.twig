@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'userPages.contact.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Basketballspielbetrieb Leipzig e.V.</h4>
+                <p>c/o Danilo Roscher</p>
+                <p>Hildebrandstraße 28</p>
+                <p>04277 Leipzig</p>
+                <a href="mailto:roscher@basketball-in-leipzig.de" target="_top">roscher@basketball-in-leipzig.de</a>
+                <p> + 49 (0) 341 462 65 38</p>
+                <p> + 49 (0) 177 68 53 902</p>
+
+                <p>Amtsgericht Leipzig VR 1007</p>
+                <p>Vertretungsberechtigter Vorstand nach §26 BGB:</p>
+                <p>Danilo Roscher (Präsident), Robert Bechler, Hannes Huke</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+{% endblock %}

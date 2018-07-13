@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'userPages.teams.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div id="portfoliowrap">
+        <div class="portfolio-centered">
+            <div class="recentitems portfolio">
+
+
+                {% for team in teams %}
+                    <div class="portfolio-item web-design">
+                        <div class="he-wrap tpl6" title="{{ team.name }}">
+                            <img src="{{ team.viewPath(basePath) }}" alt="" >
+                            <div class="he-view">
+                                <div class="bg a0" data-animate="fadeIn">
+                                    <h3 class="a1" data-animate="fadeInDown">{{ team.name }}</h3>
+                                    {% if team.needCoaches %}
+                                        <p class="teamInfoText">{{ 'team.fields.coaches'|trans }}</p>
+                                    {% endif %}
+                                    {% if team.needPlayers %}
+                                        <p class="teamInfoText">{{ 'team.fields.players'|trans }}</p>
+                                    {% endif %}
+                                    <a target="_blank" href="{{ team.linkToPage }}" class="dmbutton a2"
+                                       data-animate="fadeInUp"><i
+                                                class="fa fa-link"></i></a>
+                                </div><!-- he bg -->
+                            </div><!-- he view -->
+                        </div><!-- he wrap -->
+                    </div><!-- end col-12 -->
+                {% endfor %}
+            </div><!-- portfolio -->
+        </div><!-- portfolio container -->
+    </div><!--/Portfoliowrap -->
+    {% if teamMap %}
+    <div>
+        <div class="container centered">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>{{ 'team.fields.map'|trans }}</h2>
+                    <div class="hline"></div><br>
+                    {{ teamMap.MapLink|raw }}
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+    <script src="{{ asset('js/overviewClubs.js') }}"></script>
+{% endblock %}

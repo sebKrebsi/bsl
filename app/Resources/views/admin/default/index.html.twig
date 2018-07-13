@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'admin.title.overview'|trans }}{% endblock %}
+
+{% block content %}
+    <h3>{{ 'admin.actions.news'|trans }}</h3>
+    <ul>
+        <li><a class="btn btn-default" href="{{ path('news_index') }}">{{ 'action.show'|trans }}</a><a
+                    class="btn btn-primary" href="{{ path('news_new') }}">{{ 'action.create'|trans }}</a></li>
+        <li></li>
+    </ul>
+    <h3>{{ 'admin.actions.clubs'|trans }}</h3>
+    <ul>
+        <li><a class="btn btn-default" href="{{ path('team_index') }}">{{ 'action.show'|trans }}</a><a
+                    class="btn btn-primary" href="{{ path('team_new') }}">{{ 'action.create'|trans }}</a></li>
+    </ul>
+    <h3>{{ 'admin.actions.files'|trans }}</h3>
+    <ul>
+        <li><a class="btn btn-default" href="{{ path('file_index') }}">{{ 'action.show'|trans }}</a><a
+                    class="btn btn-primary" href="{{ path('file_new') }}">{{ 'action.create'|trans }}</a></li>
+    </ul>
+    <h3>{{ 'admin.actions.teamMap'|trans }}</h3>
+    <ul>
+        <li><a class="btn btn-default" href="{{ path('teammap_index') }}">{{ 'action.show'|trans }}</a>
+    </ul>
+{% endblock %}

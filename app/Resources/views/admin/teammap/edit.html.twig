@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'teamMap.title.edit'|trans }}{% endblock %}
+{% block content %}
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input class="btn btn-primary" type="submit" value="{{ 'action.save'|trans }}"/>
+    {{ form_end(edit_form) }}
+
+    <a class="btn btn-default" href="{{ path('teammap_index') }}">{{ 'action.backToList'|trans }}</a>
+{% endblock %}

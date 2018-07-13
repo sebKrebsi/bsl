@@ -1,0 +1,46 @@
+{% extends '@KnpMenu/menu.html.twig' %}
+{% import 'knp_menu.html.twig' as knp_menu %}
+
+{% block root %}
+    {% set dropDownId, dropDownCollapsed = 0, false %}
+    {{ parent() }}
+{% endblock %}
+
+{% block list %}
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        <ul{{ knp_menu.attributes(listAttributes|merge({'class': [
+            options.rootClass is defined ? options.rootClass : '',
+            listAttributes.class is defined ? listAttributes.class : '',
+            dropDownCollapsed > 0  ? 'collapse' : '',
+            ]|join(' '), 'id' : dropDownId > 0 ? 'collapse_' ~ dropDownId : ''
+        })) }}>
+            {% set options = options|merge({'rootClass': ''}) %}
+            {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block item %}
+    {% if item.extras.dropdown is defined and item.extras.dropdown %}
+        {% set dropDownId = random() %}
+        {%- if matcher.isAncestor(item, options.matchingDepth) %}
+            {% set dropDownCollapsed = false %}
+        {% else %}
+            {% set dropDownCollapsed = true %}
+        {%- endif %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{# replace item.label with parent() if translations are needed #}
+{% block label %}{% if item.extras.icon_class is defined %}<i
+    class="{{ item.extras.icon_class }}"></i> {% endif %}{{ item.label }}{% endblock %}
+
+{# SB Admin Template dropdown implementation #}
+{% block spanElement %}
+    {% if item.extras.dropdown is defined and item.extras.dropdown %}
+        <a href="javascript:;" data-toggle="collapse" data-target="#collapse_{{ dropDownId }}">{{ block('label') }} <i class="fa fa-fw fa-caret-down"></i></a>
+    {% else %}
+        <span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('label') }}</span>
+    {% endif %}
+{% endblock %}

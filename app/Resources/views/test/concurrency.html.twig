@@ -1,0 +1,66 @@
+{% extends "::base.html.twig" %}
+
+{% block page_title %}Concurrency Tests{% endblock %}
+
+{% block content %}
+    <p>You can watch the <a href="/fpm-status?html&all" target="_blank">PHP FPM Status</a></p>
+
+    <form id="request-form">
+        <div class="form-group">
+            <label class="control-label">Number of Requests:</label>
+            <input name="requests" value="5">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Seconds to sleep:</label>
+            <input name="seconds" value="10">
+        </div>
+        <button data-action="start">Start</button>
+        <button data-action="reset">Reset</button>
+    </form>
+
+    <h3>Requests</h3>
+    <div id="results"></div>
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+    <script>
+        (function($) {
+            var $form = $('#request-form'),
+                $requestsInput = $form.find('[name=requests]'),
+                $secondsInput = $form.find('[name=seconds]');
+
+            $form.find('[data-action=start]').on('click', function(ev) {
+                ev.preventDefault();
+                var seconds = $secondsInput.val();
+                for (var i = 0, l = $requestsInput.val(); i < l; i++) {
+                    addRequest(seconds);
+                }
+            });
+
+            $form.find('[data-action=reset]').on('click', function(ev) {
+                ev.preventDefault();
+
+                $results.html('');
+            });
+
+
+            var $results = $('#results');
+
+            function addRequest(seconds) {
+                var startTime = Date.now(),
+                    $div = $('<div />');
+                $div.text('request started');
+                $results.append($div);
+
+                $.ajax({
+                    url: '{{ path('test_sleep') }}',
+                    data: {seconds: seconds},
+                    success: function(response) {
+                        $div.text('request completed after ' + ((Date.now() - startTime) / 1000) + ': ' + response);
+                    }
+                });
+            }
+        })(jQuery);
+    </script>
+{% endblock %}

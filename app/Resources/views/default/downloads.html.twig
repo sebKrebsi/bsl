@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'userPages.downloads.headline'|trans }}{% endblock %}
+
+{% block content %}
+
+
+    <table class="table table-bordered table-striped table-responsive text-center">
+    {% for file in files %}
+        <tr>
+            <td><a class="fa fa-file download-link" href="{{ file.fetchDownloadPath(basePath) }}" download="true"> {{ file.name }} </a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+{% endblock %}

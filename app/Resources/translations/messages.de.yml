@@ -1,0 +1,100 @@
+action:
+  save: Speichern
+  backToList: Zurück zur Liste
+  delete: Löschen
+  create: Erstellen
+  show: Ansehen
+  headline: Aktionen
+file:
+  title:
+    edit: Download Datei bearbeiten
+    index: Download Dateien
+    new: Neue Downlaod Datei
+  form:
+    file: Download Datei
+admin:
+  title:
+    overview: Willkommen im Adminbereich
+  actions:
+    news: "Neuigkeiten :"
+    clubs: "Teams :"
+    files: "Dateien :"
+    teamMap: "Karte für Teams"
+menu:
+  admin:
+    overview: Adminbereich
+    news: Neuigkeiten
+    files: Download Dateien
+    teams: Teams
+    teamsMap: Team Karte
+  user:
+    profile: Profil
+    logOut: Logout
+  navi:
+    news: Neuigkeiten
+    clubs: Teams
+    contact: Kontakt
+    imprint: Impressum
+    downloads: Downloads
+    league: Liga
+news:
+  title:
+    edit: Neuigkeiten bearbeiten
+    index: Übersicht Neuigkeiten
+    new: Neue Neuigkeiten
+  form:
+    headline: Überschrift
+    description: Beschreibung
+    msg: Nachricht
+    publish: ist Veröffentlicht
+footer:
+  about:
+    headline: About
+    msg: "Der Basketballspielbetrieb Leipzig e.V. (BSL) organisiert den Basketballsport in und um Leipzig und leitet den Bezirksligaspielbetrieb"
+  socialMedia:
+    headline: Social Media
+  bunker:
+    headline: Our Bunker
+  links:
+    headline: Links
+userPages:
+  downloads:
+    headline: Downloads
+  contact:
+    headline: Kontakt
+  accessDenie:
+    headline: Zugriff verweigert
+  imprint:
+    headline: Impressum
+  leagues:
+    headline: Liga
+  news:
+    headline: Neuigkeiten
+    facebook: Basketballnews in Leipzig
+  teams:
+    headline: Basketball-Teams in Leipzig
+team:
+  title:
+    edit: Team bearbeiten
+    show: Team anzeigen
+    new: Neues Team
+    index: Alle Teams
+  fields:
+    position: Position
+    image: Bild
+    needCoaches: Werden coaches benötigt?
+    needPlayers: Werden spieler benötigt?
+    linkToPage: Link zur Seite
+    name: Name
+    players: Sucht Spieler
+    coaches: Sucht Trainer
+    map: Wo finde ich Basketball-Teams in Leipzig?
+no: Nein
+yes: Ja
+teamMap:
+  fields:
+    link: Link
+  title:
+    index: Übersicht Karte
+    edit: Karte bearbeiten
+    new: Karte erstellen

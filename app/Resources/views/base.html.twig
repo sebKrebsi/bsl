@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Die offizielle Website des Basketball in Leipzig e. V. Hier findest du Infos zu Leipziger Basketballteams und zur Leipziger Basketball-Bezirksliga">
+    <meta name="author" content="Basketball in Leipzig e. V.">
+    <meta name="keywords" content="Basketball, Leipzig, Leipziger Basketballsport, Leipziger Basketballvereine, Basketballteams, Sport in Leipzig">
+
+    <link rel="shortcut icon" href="{{ asset("images/logos/bzl.png") }}">
+
+    <title>{% block title %}BZL{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet"/>
+        <link href="{{ asset('css/externals.css') }}" type="text/css" rel="stylesheet"/>
+    {% endblock %}
+
+    <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+    {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+
+    {# Javascript build with grunt #}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+
+    {% block javascript %}{% endblock %}
+</head>
+
+<body>
+<!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('homepage') }}"><img class="nav-logo"
+                                                                       src="{{ asset('images/logos/bzl.png') }}">
+            </a>
+        </div>
+        <!-- Top Menu Items -->
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ path('news') }}">
+                        {{ 'menu.navi.news'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('homepage') }}">
+                        {{ 'menu.navi.clubs'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('contact') }}">
+                        {{ 'menu.navi.contact'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('imprint') }}">
+                        {{ 'menu.navi.imprint'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('downloads') }}">
+                        {{ 'menu.navi.downloads'|trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('leagues') }}">
+                        {{ 'menu.navi.league'|trans }}</a>
+                </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ 'menu.admin.overview'|trans }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('admin_homepage') }}"><i class="fa fa-fw fa-user-secret"></i>
+                                    {{ 'menu.admin.overview'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('news_index') }}"><i class="fa fa-fw fa-newspaper-o"></i>
+                                    {{ 'menu.admin.news'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('team_index') }}"><i class="fa fa-fw fa-users"></i>
+                                    {{ 'menu.admin.teams'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('teammap_index') }}"><i class="fa fa-fw fa-map"></i>
+                                    {{ 'menu.admin.teamsMap'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('file_index') }}"><i class="fa fa-fw fa-file"></i>
+                                    {{ 'menu.admin.files'|trans }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {% if is_granted("ROLE_USER") %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                    class="fa fa-user"></i> {{ app.user.username }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-fw fa-user"></i>
+                                    {{ 'menu.user.profile'|trans }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-fw fa-power-off"></i>
+                                    {{ 'menu.user.logOut'|trans }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 centered">
+            <h1>{% block page_title %}BLANK PAGE{% endblock %}</h1>
+            <br>
+            <div class="hline"></div>
+        </div>
+    </div>
+</div>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div id="messages" class="col-lg-12">
+                <!-- /.row -->
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }}">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message|nl2br }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+{% block content %}{% endblock %}
+<div id="footerwrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h4>{{ 'footer.about.headline'|trans }}</h4>
+                <div class="hline-w"></div>
+                <p>{{ 'footer.about.msg'|trans }}</p>
+            </div>
+            <div class="col-lg-4">
+                <h4>{{ 'footer.socialMedia.headline'|trans }}</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="https://www.facebook.com/BasketballLeipzig/" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fa fa-flickr"></i></a>
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>{{ 'footer.bunker.headline'|trans }}</h4>
+                <div class="hline-w"></div>
+                <p>
+                    Hildebrandstraße 28<br/>
+                    04277 Leipzig<br/>
+                    roscher@basketball-in-leipzig.de<br/>
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>{{ 'footer.links.headline'|trans }}</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="http://www.basketball-bund.de/" target="_blank"><img
+                                src="{{ asset('images/logos/BVS-icon.png') }}"></img></a>
+                    <a href="http://www.basketballverband-sachsen.de/" target="_blank"><img
+                                src="{{ asset('images/logos/DBB logo.png') }}"></img></a>
+                </p>
+            </div>
+
+        </div>
+        <! --/row -->
+    </div>
+    <! --/container -->
+</div>
+<! --/footerwrap -->
+<!-- /#page-wrapper -->
+
+{% block javascript_body %}{% endblock %}
+</body>
+</html>

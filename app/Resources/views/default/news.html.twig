@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'userPages.news.headline'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8" id="page-news-container">
+                {% for singleNews in pagination %}
+                    <h3 class="ctitle">{{ singleNews.headline }}</h3>
+                    <p>
+                        <csmall>Posted: {{ singleNews.createDate.format('d.m.Y') }}</csmall>
+                    </p>
+                    <p>{{ singleNews.shortDescription|raw }}</p>
+                    <p><a href="{{ path('single_post', {id: singleNews.id}) }}">[Read More]</a></p>
+                    <div class="hline"></div>
+
+                    <div class="spacing"></div>
+                {% endfor %}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h2>{{ 'userPages.news.facebook'|trans }}</h2>
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FBasketballLeipzig&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
+                        id="facebook-news-iframe"
+                        class="facebook-iframe"
+                        scrolling="no" frameborder="0"
+                        allowTransparency="true"></iframe>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascript_body %}
+    {{ parent() }}
+    <script src="{{ asset('js/news.js') }}"></script>
+{% endblock %}

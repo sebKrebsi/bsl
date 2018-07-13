@@ -1,0 +1,29 @@
+{% macro label(item) %}
+    {% spaceless %}
+        {% if item.extras.icon_class is defined %}<i
+            class="{{ item.extras.icon_class }}"></i> {% endif %}{{ item.label }}
+    {% endspaceless %}
+{% endmacro %}
+
+{% block root %}
+    {% import _self as menu %}
+    {% if item.displayed %}
+        <ol class="breadcrumb">
+        {%- for link in menu_manipulator(item) %}
+            {% if loop.index != 1 %}
+                <li>
+                    {%- if not loop.last and link.uri is not empty %}<a
+                        href="{{ link.uri }}">{{- menu.label(link.item) -}}</a>
+                    {%- else %}
+                        {% if link.uri is not empty %}
+                            <a href="{{ link.uri }}">{{ menu.label(link.item) }}</a>
+                        {% else %}
+                            {{ menu.label(link.item) }}
+                        {% endif %}
+                    {%- endif %}
+                </li>
+            {% endif %}
+        {%- endfor %}
+        </ol>
+    {% endif %}
+{% endblock %}

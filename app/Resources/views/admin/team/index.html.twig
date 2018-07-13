@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'team.title.index'|trans }}{% endblock %}
+
+{% block content %}
+    {{ datatable_render(datatable) }}
+{% endblock %}

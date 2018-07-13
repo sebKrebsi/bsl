@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'news.title.index'|trans }}{% endblock %}
+
+{% block content %}
+    {{ datatable_render(datatable) }}
+{% endblock %}
