@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block page_title %}{{ 'file.title.new'|trans }}{% endblock %}
 {% block content %}
+    {% if error %}
+        <div>
+            <h3>
+                Beim Hochladen der Datei ist ein Fehler aufgetreten.
+                Bitte achten Sie darauf das der Datei name nicht bereits verwendet wird.
+            </h3>
+        </div>
+    {% endif %}
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <input class="btn btn-primary" type="submit" value="{{ 'action.create'|trans }}"/>

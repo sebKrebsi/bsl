@@ -6,8 +6,6 @@
     <div id="portfoliowrap">
         <div class="portfolio-centered">
             <div class="recentitems portfolio">
-
-
                 {% for team in teams %}
                     <div class="portfolio-item web-design">
                         <div class="he-wrap tpl6" title="{{ team.name }}">
@@ -24,14 +22,14 @@
                                     <a target="_blank" href="{{ team.linkToPage }}" class="dmbutton a2"
                                        data-animate="fadeInUp"><i
                                                 class="fa fa-link"></i></a>
-                                </div><!-- he bg -->
-                            </div><!-- he view -->
-                        </div><!-- he wrap -->
-                    </div><!-- end col-12 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </div><!-- portfolio -->
-        </div><!-- portfolio container -->
-    </div><!--/Portfoliowrap -->
+            </div>
+        </div>
+    </div>
     {% if teamMap %}
     <div>
         <div class="container centered">

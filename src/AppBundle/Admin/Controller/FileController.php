@@ -59,24 +59,31 @@ class FileController extends Controller
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
+        $error = false;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($file);
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($file);
 
-            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
 
-            // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
-            $uploadableManager->markEntityToUpload($file, $form->get('myFile')->getData());
+                // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
+                $uploadableManager->markEntityToUpload($file, $form->get('myFile')->getData());
 
-            $em->flush();
+                $em->flush();
 
-            return $this->redirectToRoute('file_index');
+                return $this->redirectToRoute('file_index');
+            } catch (\Exception $exception) {
+                $this->get('logger')->error($exception->getMessage());
+                $error = true;
+            }
         }
 
         return $this->render(':admin/file:new.html.twig', array(
-            'file' => $file,
-            'form' => $form->createView(),
+            'file'  => $file,
+            'form'  => $form->createView(),
+            'error' => $error
         ));
     }
 
@@ -94,22 +101,29 @@ class FileController extends Controller
         $deleteForm = $this->createDeleteForm($file);
         $editForm   = $this->createForm(FileType::class, $file);
         $editForm->handleRequest($request);
+        $error = false;
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+            try {
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
 
-            // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
-            $uploadableManager->markEntityToUpload($file, $editForm->get('myFile')->getData());
+                // Here, "getMyFile" returns the "UploadedFile" instance that the form bound in your $myFile property
+                $uploadableManager->markEntityToUpload($file, $editForm->get('myFile')->getData());
 
-            $this->getDoctrine()->getManager()->flush();
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('file_edit', array('id' => $file->getId()));
+                return $this->redirectToRoute('file_edit', array('id' => $file->getId()));
+            } catch (\Exception $exception) {
+                $this->get('logger')->error($exception->getMessage());
+                $error = true;
+            }
         }
 
         return $this->render(':admin/file:edit.html.twig', array(
             'file'        => $file,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'error'       => $error
         ));
     }
 

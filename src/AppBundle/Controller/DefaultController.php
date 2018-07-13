@@ -56,7 +56,7 @@ class DefaultController extends Controller
      */
     public function teamsAction()
     {
-        $teams   = $this->getDoctrine()->getRepository(Team::class)->getTeams();
+        $teams = $this->getDoctrine()->getRepository(Team::class)->getTeams();
 
         // replace this example code with whatever you need
         return $this->render('default/teams.html.twig', [
@@ -83,7 +83,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $files = $em->getRepository(File::class)->findAll();
+        $files = $em->getRepository(File::class)->findBy([], ['id' => 'DESC']);
 
         // replace this example code with whatever you need
         return $this->render('default/downloads.html.twig', [

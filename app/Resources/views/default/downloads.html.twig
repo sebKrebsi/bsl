@@ -9,6 +9,7 @@
     {% for file in files %}
         <tr>
             <td><a class="fa fa-file download-link" href="{{ file.fetchDownloadPath(basePath) }}" download="true"> {{ file.name }} </a></td>
+            <td>{{ file.createAt.format('d:m:Y') }}</td>
         </tr>
     {% endfor %}
     </table>
